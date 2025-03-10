@@ -861,14 +861,14 @@ OptionsCheck() && badges[restriction] == 0 && BattleType() == 7
 LastUsedPokeball() != 0x0001)
 
 function evolve(pokemon, restriction, species_id, pokemon_amount=0) => 
-OptionsCheck() && badges[restriction] == 0 && Music() == 0x2e68 &&
+OptionsCheck() && badges[restriction] == 0 &&
 any_of(range(0x02c2a4,0x02c498,step=0x64), a => word(a) == species_id && prev(word(a)) != species_id)
 && (CaughtPokemonAmount() >= pokemon_amount || pokemon_amount == 0)
 && (restriction == "Time" || restriction == "Pokemon League" || restriction == "Postgame" || 
 LastUsedPokeball() != 0x0001)
 
 function hatch(pokemon, restriction, species_id, pokemon_amount=0) => 
-OptionsCheck() && badges[restriction] == 0 && Music() == 0x2e68 &&
+OptionsCheck() && badges[restriction] == 0 &&
 any_of(range(0x02c2a4,0x02c498,step=0x64), a => word(a) == species_id && byte(a+0x34) == 1 && prior(byte(a+0x9)) == 0)
 && (CaughtPokemonAmount() >= pokemon_amount || pokemon_amount == 0)
 && (restriction == "Time" || restriction == "Pokemon League" || restriction == "Postgame" || 
@@ -913,7 +913,7 @@ achievement(
 
 achievement(
     title = "INSTRUCTIONS", points = 0, id = 318451,
-    description = "Battle difficulty must be Difficult or higher, turn off the level cap, no randomizer options, no New Game+, no mystery gifts, no trading, no changing your RTC.",
+    description = "Battle difficulty must be Difficult or higher, turn off the level cap, no randomizer options, no New Game+, no mystery gifts, no trading.",
     trigger = byte(0x000000) == prev(byte(0x000000))
 )
 
@@ -1211,7 +1211,7 @@ pokemonObtain("Houndour",getBadge(),1," on Route 5 (night).",getTotalPokemonCoun
 pokemonObtain("Houndoom",getBadge(),1," by evolving Houndour.",getTotalPokemonCount())
 pokemonObtain("Yanma",getBadge(),1," on Route 5 (day).",getTotalPokemonCount())
 pokemonObtain("Yanmega",getBadge(),1," by evolving Yanma (while knowing Ancient Power).",getTotalPokemonCount())
-pokemonObtain("Venonat",getBadge(),1," on Route 5.",getTotalPokemonCount())
+pokemonObtain("Venonat",getBadge(),1," on Route 5 (night).",getTotalPokemonCount())
 pokemonObtain("Venomoth",getBadge(),1," by evolving Venonat.",getTotalPokemonCount())
 pokemonObtain("Purrloin",getBadge(),1," on Route 5.",getTotalPokemonCount())
 pokemonObtain("Liepard",getBadge(),1," by evolving Purrloin.",getTotalPokemonCount())
@@ -1291,7 +1291,7 @@ function getBadge() => "Wings"
 pokemonObtain("Phanpy",getBadge(),1," in Valley Cave.",getTotalPokemonCount())
 pokemonObtain("Donphan",getBadge(),1," by evolving Phanpy.",getTotalPokemonCount())
 pokemonObtain("Gligar",getBadge(),1," in Valley Cave.",getTotalPokemonCount())
-pokemonObtain("Dunsparce",getBadge(),1," in Valley Cave.",getTotalPokemonCount())
+pokemonObtain("Dunsparce",getBadge(),1," in Valley Cave (swarm).",getTotalPokemonCount())
 
 // Route 6
 pokemonObtain("Bunnelby",getBadge(),1," on Route 6.",getTotalPokemonCount())
@@ -1455,7 +1455,7 @@ achievement(
     )
 )
 achievement(
-    title = "Goodra", description = "Obtain Goodra by evolving Sliggoo.", points = 1,
+    title = "Goodra", description = "Obtain Goodra by evolving Sliggoo (level-up in rain or fog).", points = 1,
     trigger = (
     (
         always_false() || 
@@ -1471,7 +1471,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Goodra", description = "Obtain Hisuian Goodra by evolving Hisuian Sliggoo.", points = 1,
+    title = "Hisuian Goodra", description = "Obtain Hisuian Goodra by evolving Hisuian Sliggoo (level-up in rain or fog).", points = 1,
     trigger = (
     (
         always_false() || 
@@ -1595,7 +1595,7 @@ achievement(
     )
 )
 achievement(
-    title = "Alolan Golem", description = "Obtain Alolan Golem by evolving Alolan Graveler.", points = 1,
+    title = "Alolan Golem", description = "Obtain Alolan Golem by evolving Alolan Graveler (Link Stone).", points = 1,
     trigger = (
     (
         always_false() || 
@@ -1620,7 +1620,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Samurott I", description = "If possible, obtain Hisuian Samurott by evolving Dewott (Hisui Rock).", points = 1,
+    title = "Hisuian Samurott I", description = "If possible, obtain Hisuian Samurott by evolving Dewott (Hisui Rock). Otherwise, will automatically unlock upon gym completion.", points = 1,
     trigger = (
     (
         always_false() || 
@@ -1811,7 +1811,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Samurott II", description = "If possible, obtain Hisuian Samurott by evolving Dewott (Hisui Rock).", points = 1,
+    title = "Hisuian Samurott II", description = "If possible, obtain Hisuian Samurott by evolving Dewott (Hisui Rock). Otherwise, will automatically unlock upon gym completion.", points = 1,
     trigger = (
     (
         always_false() || 
@@ -1874,8 +1874,8 @@ pokemonObtain("Cacnea",getBadge(),1," at the Great Desert.",getTotalPokemonCount
 pokemonObtain("Cacturne",getBadge(),1," by evolving Cacnea.",getTotalPokemonCount())
 pokemonObtain("Darumaka",getBadge(),1," at the Great Desert.",getTotalPokemonCount())
 pokemonObtain("Darmanitan",getBadge(),1," by evolving Darumaka.",getTotalPokemonCount())
-pokemonObtain("Hippopotas",getBadge(),1," at the Great Desert.",getTotalPokemonCount())
-pokemonObtain("Hippowdon",getBadge(),1," by evolving Hippopotas.",getTotalPokemonCount())
+pokemonObtain("Hippopotas",getBadge(),1," by breeding Hippowdon.",getTotalPokemonCount())
+pokemonObtain("Hippowdon",getBadge(),1," at the Great Desert.",getTotalPokemonCount())
 pokemonObtain("Trapinch",getBadge(),1," by breeding Vibrava or Flygon.",getTotalPokemonCount())
 pokemonObtain("Vibrava",getBadge(),1," at the Great Desert.",getTotalPokemonCount())
 pokemonObtain("Flygon",getBadge(),1," by evolving Vibrava.",getTotalPokemonCount())
@@ -1934,7 +1934,7 @@ achievement(
         evolve("Hisuian Braviary",getBadge(),0x4de,getTotalPokemonCount()))
     )
 )
-pokemonObtain("Vullaby",getBadge(),1," by finding in the Great Desert (Monday or Tuesday).",getTotalPokemonCount())
+pokemonObtain("Vullaby",getBadge(),1," by finding in the Great Desert (Thursday).",getTotalPokemonCount())
 pokemonObtain("Mandibuzz",getBadge(),1," by evolving Vullaby.",getTotalPokemonCount())
 
 // Vivill
@@ -2286,7 +2286,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Decidueye I", description = "If possible, obtain Hisuian Decidueye by evolving Dartrix (Hisui Rock).", points = 1,
+    title = "Hisuian Decidueye I", description = "If possible, obtain Hisuian Decidueye by evolving Dartrix (Hisui Rock). Otherwise, will automatically unlock upon gym completion.", points = 1,
     trigger = (
     (
         always_false() || 
@@ -2452,7 +2452,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Decidueye II", description = "If possible, obtain Hisuian Decidueye by evolving Dartrix (Hisui Rock).", points = 1,
+    title = "Hisuian Decidueye II", description = "If possible, obtain Hisuian Decidueye by evolving Dartrix (Hisui Rock). Otherwise, will automatically unlock upon gym completion.", points = 1,
     trigger = (
     (
         always_false() || 
@@ -2536,7 +2536,7 @@ achievement(
     )
 )
 achievement(
-    title = "Hisuian Decidueye III", description = "If not already obtained, obtain Hisuian Decidueye by evolving Dewott (Hisui Rock).", points = 1,
+    title = "Hisuian Decidueye III", description = "If not already obtained, obtain Hisuian Decidueye by evolving Dartrix (Hisui Rock).", points = 1,
     trigger = (
     (
         always_false() || 
